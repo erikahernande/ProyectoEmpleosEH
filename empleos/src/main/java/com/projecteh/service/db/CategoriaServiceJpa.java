@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.projecteh.model.Categoria;
@@ -11,6 +12,7 @@ import com.projecteh.repository.CategoriasRepository;
 import com.projecteh.service.ICategoriasService;
 
 @Service
+@Primary
 public class CategoriaServiceJpa implements ICategoriasService {
 
 	@Autowired
@@ -34,7 +36,7 @@ public class CategoriaServiceJpa implements ICategoriasService {
 		// TODO Auto-generated method stub
 		Optional<Categoria> optional = categoriasRepo.findById(idCategoria);
 		if(optional.isPresent()) {
-			return optional.get();
+			optional.get();
 		}
 		return null;
 	}

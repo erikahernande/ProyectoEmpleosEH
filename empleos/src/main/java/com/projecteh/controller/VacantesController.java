@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -38,6 +39,7 @@ public class VacantesController {
 	private IVacantesService serviceVacantes;
 	
 	@Autowired
+	//@Qualifier("categoriaServiceJpa")
 	private ICategoriasService serviceCategorias;
 	
 	@GetMapping("/index")
