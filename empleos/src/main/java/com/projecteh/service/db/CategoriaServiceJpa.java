@@ -36,7 +36,7 @@ public class CategoriaServiceJpa implements ICategoriasService {
 		// TODO Auto-generated method stub
 		Optional<Categoria> optional = categoriasRepo.findById(idCategoria);
 		if(optional.isPresent()) {
-			optional.get();
+			return optional.get();
 		}
 		return null;
 	}
