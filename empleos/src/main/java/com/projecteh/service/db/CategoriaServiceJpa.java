@@ -44,6 +44,7 @@ public class CategoriaServiceJpa implements ICategoriasService {
 	@Override
 	public void eliminar(Integer idCategoria) {
 		// TODO Auto-generated method stub
+		categoriasRepo.deleteById(idCategoria);
 		
 	}
 

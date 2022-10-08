@@ -116,7 +116,6 @@ public class VacantesController {
 	public String editar(@PathVariable("id") int idVacante, Model model) {
 		Vacante vacante = serviceVacantes.buscarPorId(idVacante);
 		model.addAttribute("vacante", vacante);
-		
 		return "vacantes/formVacante";
 	}
 

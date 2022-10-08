@@ -27,7 +27,7 @@
           <h4 class="card-header"><strong>Datos de la categoría</strong></h4>              
           <div class="card-body">
             <form th:action="@{/categorias/save}" method="post" th:object="${categoria}">
-              <div th:if="${#fields.hasErrors('*')}"class='alert alert-danger' role='alert'>
+              <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
 				Por favor corrija los siguientes errores:
 				<ul>
 				<li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
@@ -37,7 +37,8 @@
                 <div class="col-md-6"> 
                   <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escriba el nombre de la categoria" required="required">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="text" class="form-control" th:field="*{nombre}"  id="nombre" name="nombre" placeholder="Escriba el nombre de la categoria" required="required">
                   </div>
                 </div>                
               </div> 
@@ -45,7 +46,7 @@
                 <div class="col-md-6"> 
                   <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <textarea class="form-control" name="descripcion" id="descripcion" rows="2"></textarea>
+                    <textarea class="form-control" name="descripcion" th:field="*{descripcion}" id="descripcion" rows="2"></textarea>
                   </div> 
                 </div>                
               </div> 

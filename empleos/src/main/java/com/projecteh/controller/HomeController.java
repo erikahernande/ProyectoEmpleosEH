@@ -9,8 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projecteh.model.Usuario;
 import com.projecteh.model.Vacante;
+import com.projecteh.service.IUsuariosService;
 import com.projecteh.service.IVacantesService;
 
 @Controller 
@@ -18,6 +22,30 @@ public class HomeController {
 	
 	@Autowired
 	private IVacantesService serviceVacantes;
+	
+	@Autowired
+    private IUsuariosService serviceUsuarios;
+	
+	
+	@GetMapping("/signup")
+	public String registrarse(Usuario usuario,Model model) {
+		return "usuarios/formRegistro";
+	}
+	
+	/**@PostMapping("/signup")
+	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+		 Ejercicio.
+		 usuario.setEstatus(1);
+		 usuario.setFechaRegitro(new Date());
+		 
+		 Perfil perfil = new Perfil();
+		 perfil.setId(3);
+		 usuario.agregar(perfil);
+		 
+		serviceUsuarios.guardar(usuario);
+		attributes.addFlashAttribute("msg", "Usuario registrado exitosamente");		
+		return "redirect:/usuarios/index";
+	}*/
 	
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {
