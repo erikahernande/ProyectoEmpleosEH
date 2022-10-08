@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projecteh.model.Perfil;
 import com.projecteh.model.Usuario;
 import com.projecteh.model.Vacante;
+import com.projecteh.service.ICategoriasService;
 import com.projecteh.service.IUsuariosService;
 import com.projecteh.service.IVacantesService;
 
 @Controller 
 public class HomeController {
+	
+	@Autowired
+	private ICategoriasService serviceCategorias;
 	
 	@Autowired
 	private IVacantesService serviceVacantes;
@@ -32,11 +37,11 @@ public class HomeController {
 		return "usuarios/formRegistro";
 	}
 	
-	/**@PostMapping("/signup")
+	@PostMapping("/signup")
 	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
-		 Ejercicio.
+		 //Ejercicio.
 		 usuario.setEstatus(1);
-		 usuario.setFechaRegitro(new Date());
+		 usuario.setFechaRegistro(new Date());
 		 
 		 Perfil perfil = new Perfil();
 		 perfil.setId(3);
@@ -45,7 +50,7 @@ public class HomeController {
 		serviceUsuarios.guardar(usuario);
 		attributes.addFlashAttribute("msg", "Usuario registrado exitosamente");		
 		return "redirect:/usuarios/index";
-	}*/
+	}
 	
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {
@@ -88,9 +93,21 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("/search")
+	public String buscar(@ModelAttribute("search") Vacante vacante) {
+		System.out.println("buscando por" +  vacante);
+		return "home";
+	}
+	
 	@ModelAttribute
 	public void setGenericos(Model model) {
+		Vacante vacanteSearch = new Vacante();
+		vacanteSearch.reset();
 		model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());
+		model.addAttribute("categorias", serviceCategorias.buscarTodas());
+
+		model.addAttribute("search", vacanteSearch);
 	}
+	
 	
 }
