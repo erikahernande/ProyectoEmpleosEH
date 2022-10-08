@@ -28,12 +28,12 @@ public class CategoriasController {
 	//@Qualifier("categoriaServiceJpa")
    	private ICategoriasService serviceCategorias;
 	
-	@RequestMapping(value="/index", method=RequestMethod.GET)
+	/**@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String mostrarIndex(Model model) {
 		List<Categoria> lista = serviceCategorias.buscarTodas();
     	model.addAttribute("categorias", lista);
 		return "categorias/listCategorias";		
-	}
+	}*/
 	
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
