@@ -3,7 +3,8 @@ package com.projecteh.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projecteh.model.Categoria;
-import com.projecteh.model.Vacante;
 import com.projecteh.service.ICategoriasService;
 
 
@@ -33,6 +33,13 @@ public class CategoriasController {
 		List<Categoria> lista = serviceCategorias.buscarTodas();
     	model.addAttribute("categorias", lista);
 		return "categorias/listCategorias";		
+	}
+	
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+	Page<Categoria>lista = serviceCategorias.buscarTodas(page);
+	model.addAttribute("categorias", lista);
+	return "categorias/listcategorias";
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
@@ -64,7 +71,7 @@ public class CategoriasController {
 		System.out.println("Borrando vacante con id: " + idCategoria);
 		model.addAttribute("categorias", serviceCategorias.buscarTodas() );
 		serviceCategorias.eliminar(idCategoria);
-		attributes.addFlashAttribute("msg", "La vacante fue eliminada");
+		attributes.addFlashAttribute("msg", "La categoria fue eliminada");
 		return "redirect:/categorias/index";
 	}
 	
