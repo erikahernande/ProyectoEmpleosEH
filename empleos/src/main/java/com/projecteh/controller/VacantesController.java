@@ -44,12 +44,12 @@ public class VacantesController {
 	//@Qualifier("categoriaServiceJpa")
 	private ICategoriasService serviceCategorias;
 	
-	/**@GetMapping("/index")
+	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
 		List<Vacante> lista = serviceVacantes.buscarTodas();
     	model.addAttribute("vacantes", lista);
 		return "vacantes/listVacantes";
-	}*/
+	}
 	
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
