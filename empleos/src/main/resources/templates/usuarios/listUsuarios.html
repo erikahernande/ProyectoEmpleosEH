@@ -44,7 +44,11 @@
                   <td th:text="${usuario.nombre}"></td>
                   <td th:text="${usuario.username}"></td>                  
                   <td th:text="${usuario.email}"></td>
-                  <td th:text="${usuario.estatus}"></td>
+                  <td>
+                  	<span th:if="${usuario.estatus==1}" class="badge bg-success">Activo</span> <!-- se trata de u  operador if-less -->
+					<span th:unless="${usuario.estatus==1}" class="badge bg-danger">Bloqueado</span>
+                   </td>
+                   <!--  th:text="${usuario.estatus}">-->
                   <td>
                     <a th:href="@{/usuarios/delete/{id} (id=${usuario.id}) }" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
                     <span> 

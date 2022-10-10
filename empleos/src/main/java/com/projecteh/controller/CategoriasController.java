@@ -68,11 +68,17 @@ public class CategoriasController {
 	
 	@GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idCategoria, RedirectAttributes attributes, Model model) {
-		System.out.println("Borrando vacante con id: " + idCategoria);
-		model.addAttribute("categorias", serviceCategorias.buscarTodas() );
-		serviceCategorias.eliminar(idCategoria);
-		attributes.addFlashAttribute("msg", "La categoria fue eliminada");
+		
+		try {
+			System.out.println("Borrando vacante con id: " + idCategoria);
+			model.addAttribute("categorias", serviceCategorias.buscarTodas() );
+			serviceCategorias.eliminar(idCategoria);
+			attributes.addFlashAttribute("msg", "La categoria fue eliminada");
+			}catch(Exception e){
+			attributes.addFlashAttribute("msg", "La categoria no se puede eliminar");
+		}
 		return "redirect:/categorias/index";
+
 	}
 	
 
