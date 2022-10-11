@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -36,6 +38,17 @@ public class HomeController {
 	@Autowired
     private IUsuariosService serviceUsuarios;
 	
+	@GetMapping("/index")
+	public String mostrarIndex(Authentication auth) {
+		String username = auth.getName();
+		System.out.println("Nombre del usuario: " + username);
+		
+		for(GrantedAuthority rol: auth.getAuthorities()) {
+			System.out.println("ROL: " + rol.getAuthority());
+		}
+		
+		return "redirect:/";
+	}
 	
 	@GetMapping("/signup")
 	public String registrarse(Usuario usuario,Model model) {
